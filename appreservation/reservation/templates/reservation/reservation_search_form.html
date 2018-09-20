@@ -1,0 +1,58 @@
+{% extends 'core/base.html' %}
+{% block title %}Buscar habitacion{% endblock %}
+{% block content %}
+    <main role="main">
+      <section class="jumbotron text-center">
+        <div class="container">
+          <h1 class="jumbotron-heading">Buscar habitacion</h1>
+          <form action="." method="POST">{% csrf_token %}
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="check_in">Check-In</label>
+                {{form.check_in}}
+                {{form.check_in.errors}}
+              </div>
+              <div class="form-group col-md-6">
+                <label for="check_out">Check-Out</label>
+                {{form.check_out}}
+                {{form.check_in.errors}}
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Search</button>
+          </form>
+        </div>
+      </section>
+
+      <div class="album py-5">
+        <div class="container">
+
+          {% if room_avilable %}
+          <div class="row">
+          {% for room in room_avilable %}
+            <div class="col-md-4">
+              <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="{{room.photo.url}}" alt="Card image cap" height=200px>
+                <div class="card-body">
+                  <h5 class="card-title">{{room.room_type}}</h5>
+                  <p class="card-text">{{room.description}}</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">Capacidad: {{room.capacity}}</li>
+                    {% load reservation_extras %}
+                  <li class="list-group-item">Precio total: {{ room.price|mul:total_days }}</li>
+                </ul>
+                <div class="card-body">
+                  <a href="{% url 'reservation_reserve' room.id %}" class="card-link">Reserva</a>
+                </div>
+              </div>
+            </div>
+              {% endfor %}
+          </div>
+          {% endif%}
+
+        </div>
+
+      </div>
+
+    </main>
+{% endblock %}

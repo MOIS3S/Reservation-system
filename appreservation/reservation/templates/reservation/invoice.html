@@ -1,0 +1,56 @@
+
+<!DOCTYPE html>
+ <html>
+     <head>
+         <meta charset="utf-8">
+         <title>Title</title>
+         <style type="text/css">
+             *{
+                 padding: 0px;
+                 margin: 0px;
+             }
+             body {
+                 font-weight: 200;
+                 font-size: 14px;
+                 font-family: Serif;
+             }
+             .title {
+                 font-size: 22px;
+                 font-weight: bold;
+                 /* text-align: right;*/
+                 padding: 10px 20px 0px 20px;
+             }
+             .title span {
+                 color: #007cae;
+             }
+         </style>
+     </head>
+     <body>
+         <div class='wrapper'>
+             <div class='header'>
+                 <p class='title'>Detalle de reserva</p>
+             </div>
+         </div>
+         <main role="main">
+            <div class="container">
+                <div class="row mt-3">
+                    <div class="col-md-9 mx-auto">
+                        <ul class="list-group">
+                            <li class="list-group-item"><b>Codigo de Reserva: </b>{{reserve.id}}</li>
+                            <li class="list-group-item"><b>Nombre: </b>{{reserve.name}}</li>
+                            <li class="list-group-item"><b>Apellido: </b>{{reserve.last_name}}</li>
+                            <li class="list-group-item"><b>Email: </b>{{reserve.email}}</li>
+                            <li class="list-group-item"><b>Numero de tarjeta: </b>{{reserve.num_card}}</li>
+                            <li class="list-group-item"><b>Check-In: </b>{{reserve.check_in}}</li>
+                            <li class="list-group-item"><b>Check-Out: </b>{{reserve.check_out}}</li>
+                            <li class="list-group-item"><b>Precio Total: </b>{{reserve.total_price}}</li>
+                            {% if reserve.observations %}
+                                <li class="list-group-item"><b>Observaciones: </b>{{reserve.observations}}</li>
+                            {% endif %}
+                        </ul>  
+                    </div>
+                </div>
+            </div>
+        </main>
+     </body>
+ </html>

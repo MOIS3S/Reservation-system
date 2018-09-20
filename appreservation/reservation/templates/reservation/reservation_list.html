@@ -1,0 +1,31 @@
+{% extends 'core/base.html' %}
+{% block title %}Panel de reservas{% endblock %}
+{% block content %}
+<main role="main">
+  <div class="container mb-4">
+      {{reserve}}
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Apellido</th>
+            <th scope="col">Tipo de habitacion</th>
+            <th scope="col">Detalle</th>
+            <th scope="col">Editar</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for reserve in reservations %}
+          <tr>
+            <td>{{reserve.name}}</td>
+            <td>{{reserve.last_name}}</td>
+            <td>{{reserve.type_room}}</td>
+            <td><a href="{% url 'reservation_detail' reserve.id reserve.name|slugify %}">Ver</a></td>
+            <td><a href="{% url 'reservation_delete' reserve.id %}" style="color:red;">Borrar</a></td>
+          </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+  </div>
+</main>
+{% endblock %}
