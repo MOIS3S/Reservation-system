@@ -39,7 +39,6 @@ class SearchReservationPageView(View):
             b = datetime.strptime(check_out_date, format_date)
             # Calculo de dias de la reserva
             total_days = abs((a - b).days) + 1
-            print(total_days)
             # primer filter busca todas la reservas que sean 
             # igual o menor al check-in el segundo filter busca todas la que sean
             # igual o mayor al check-out
