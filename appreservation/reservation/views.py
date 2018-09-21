@@ -81,7 +81,7 @@ class ReservationPageView(View):
 
     def get(self, request, id, *args, **kwargs):
         # Buscamos la habitacion selecionada
-        room = Room.objects.get(id=id)
+        room = get_object_or_404(Room, id=id)
         # Calculamos el precio total de la habitacion
         # toamndo el precio de la habiatio por los dias
         total_price = room.price * request.session['total_days']
@@ -91,9 +91,9 @@ class ReservationPageView(View):
     
     def post(self, request, id, *args, **kwargs):
         # Buscamos el usuario que creo la reserva
-        user = User.objects.get(id=request.user.id)
+        user = get_object_or_404(User, id=request.user.id)
         # Buscamos la habitacion
-        room = Room.objects.get(id=id)  
+        room = get_object_or_404(Room, id=id)  
         # Rellenamo el formlario con los datos suministrados
         form = self.form_class(request.POST)
         # Verificamos si el valido
@@ -146,7 +146,7 @@ class ReservationDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['reservations'] = Reservation.objects.get(id=self.kwargs['pk'])
+        context['reservations'] = get_object_or_404(Reservation, id=self.kwargs['pk'])
         return context
 
 
@@ -160,7 +160,7 @@ class ReservationDeleteView(DeleteView):
 class GeneratePDF(View):
     def get(self,request, *args, **kwargs):
         # Buscamos la reserva por su id
-        reserve = Reservation.objects.get(id=kwargs['id'])
+        reserve = get_object_or_404(Reservation, id=kwargs['id'])
         # Cargamos el template o diseño del pdf
         template = get_template('reservation/invoice.html')
         # Guarmos la reserva en un variable context
